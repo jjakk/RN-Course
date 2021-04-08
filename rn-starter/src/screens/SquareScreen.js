@@ -11,21 +11,18 @@ const SquareScreen = () => {
     console.log(`Red: ${red}, Blue: ${blue}, Green: ${green}`);
 
     const setColor = (color, change) => {
-        if(color === red){
-            if(red + change > 255 || red + change < 0){
+        switch(color) {
+            case 'red':
+                red + change > 255 || red + change < 0 ? null : setRed(red + change);
                 return;
-            }
-            else{
-                setRed(red+change)
-            }
         }
     };
 
     return (
         <View>
             <ColorCounter
-                onIncrease={() => setColor(red, COLOR_INCREMENT)}
-                onDecrease={() => setColor(red, (-1*COLOR_INCREMENT))}
+                onIncrease={() => setColor('red', COLOR_INCREMENT)}
+                onDecrease={() => setColor('red', (-1*COLOR_INCREMENT))}
                 color='Red'
             />
             <ColorCounter
