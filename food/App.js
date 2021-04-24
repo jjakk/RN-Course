@@ -7,7 +7,7 @@ const navigator = createStackNavigator({
 }, {
   initialRouteName: 'Search',
   defaultNavigationOptions: {
-    tite: 'Business Search'
+    title: 'Business Search'
   }
 });
 
