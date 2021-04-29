@@ -15,7 +15,6 @@ const ResultsList = ({ title, results }) => {
                     return <ResultsDetail result={item} />
                 }}
             />
-            <Text>Results: {results.length}</Text>
         </View>
     );
 };
