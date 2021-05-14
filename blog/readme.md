@@ -1,2 +1,2 @@
 # Blog
-This is a basic blog app
+This is a basic blog app using react native
