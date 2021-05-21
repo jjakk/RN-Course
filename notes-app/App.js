@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Notes App</Text>
+      <Text style={{fontSize: 26}}>Notes App</Text>
       <Text>This is a basic notes app</Text>
       <StatusBar style="auto" />
     </View>
