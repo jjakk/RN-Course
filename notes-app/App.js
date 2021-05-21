@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 26}}>Notes App</Text>
+      <Text style={styles.header}>Notes App</Text>
       <Text>This is a basic notes app</Text>
       <StatusBar style="auto" />
     </View>
@@ -19,4 +19,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  header: {
+    fontSize: 26
+  }
 });
