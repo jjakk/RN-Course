@@ -10,8 +10,9 @@ const ShowScreen = ({ navigation }) => {
 
     return (
         <View>
-            <Text>{blogPost.title}</Text>
-            <Text>{blogPost.content}</Text>
+            <Text style={styles.title}>{blogPost.title}</Text>
+            <View style={styles.divider}/>
+            <Text style={styles.content}>{blogPost.content}</Text>
         </View>
     );
 };
@@ -28,7 +29,21 @@ ShowScreen.navigationOptions = ({ navigation }) => {
     };
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    title: {
+        fontSize: 24,
+        margin: 15
+    },
+    content: {
+        fontSize: 18,
+        margin: 15
+    },
+    divider: {
+        borderBottomColor: 'black',
+        borderBottomWidth: 1,
+        marginHorizontal: 15
+    }
+});
 
 export default ShowScreen;
 
