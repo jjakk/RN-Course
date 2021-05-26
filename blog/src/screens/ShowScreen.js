@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Context } from '../context/BlogContext';
-import { EvilIcons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons'; 
 
 const ShowScreen = ({ navigation }) => {
     const { state } = useContext(Context);
@@ -23,7 +23,7 @@ ShowScreen.navigationOptions = ({ navigation }) => {
             <TouchableOpacity onPress={() => {
                     navigation.navigate('Edit', { id: navigation.getParam('id') })
                 }}>
-                <EvilIcons name="pencil" size={35} />
+                <Feather name="edit-2" size={25} style={{marginRight: 15}} />
             </TouchableOpacity>
         )
     };
