@@ -12,7 +12,7 @@ router.post('/signup', async (req, res) => {
         const user = new User({ email, password });
         await user.save();
 
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_KEY);
+        const token = jwt.sign({ userId: user._id }, process.env.TOKEN_KEY);
         res.send({ token });
     }
     catch(err){
