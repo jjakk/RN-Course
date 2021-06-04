@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 const SearchBar = () => {
     return (
         <View style={styles.container}>
-            <FontAwesome name="user-o" style={styles.icon} />
+            <TouchableOpacity onPress={() => console.log('navigate to sign in')}>
+                <FontAwesome name="user-o" style={styles.icon} />
+            </TouchableOpacity>
             <TextInput
                 placeholder='Search'
                 style={styles.input}
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
         padding: 15
     },
     icon: {
-        fontSize: 28,
+        fontSize: 32,
         alignSelf: 'center'
     },
     input: {
