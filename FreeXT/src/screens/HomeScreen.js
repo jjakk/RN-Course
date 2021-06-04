@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import Spacer from '../components/Spacer';
+import NotePreview from '../components/NotePreview';
 
 const HomeScreen = () => {
     return (
@@ -9,6 +10,9 @@ const HomeScreen = () => {
             <Spacer>
                 <SearchBar />
             </Spacer>
+            <NotePreview name='Physics Notes' />
+            <NotePreview name='Chem Notes' />
+            <NotePreview name='Groceries' />
         </View>
     );
 };
