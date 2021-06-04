@@ -1,18 +1,16 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 
-const SearchBar = ({ children }) => {
+const SearchBar = ({ children, spacing }) => {
     return (
-        <View style={styles.spacer}>
+        <View style={{margin: spacing}}>
             {children}
         </View>
     );
 };
 
-const styles = StyleSheet.create({
-    spacer: {
-        margin: 25
-    }
-});
+SearchBar.defaultProps = {
+    spacing: 25
+};
 
 export default SearchBar
