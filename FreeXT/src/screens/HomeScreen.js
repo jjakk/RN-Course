@@ -1,18 +1,44 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import Spacer from '../components/Spacer';
 import NotePreview from '../components/NotePreview';
 
 const HomeScreen = () => {
+    let notes = [
+        {
+            title: 'Physics Notes',
+            contents: 'sjfksjflsdjflkjsldkfsjdfksldf',
+            id: '34028490'
+        },
+        {
+            title: 'Chem Notes',
+            contents: 'fiowehucwiehviuwvehiu',
+            id: '238490570'
+        },
+        {
+            title: 'Groceries',
+            contents: 'ghrgheriugheirug',
+            id: '754387592'
+        }
+    ];
+
     return (
         <View style={styles.container}>
             <Spacer>
                 <SearchBar />
             </Spacer>
-            <NotePreview name='Physics Notes' />
-            <NotePreview name='Chem Notes' />
-            <NotePreview name='Groceries' />
+            <FlatList
+                data={notes}
+                renderItem={({ item }) => (
+                        <NotePreview
+                            title={item.title}
+                            onClick={() => {}}
+                        />
+                    )
+                }
+                keyExtractor={(item) => item.id}
+            />
         </View>
     );
 };
