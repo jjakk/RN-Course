@@ -20,6 +20,11 @@ const HomeScreen = () => {
             title: 'Groceries',
             contents: 'ghrgheriugheirug',
             id: '754387592'
+        },
+        {
+            title: 'Things to Remember',
+            contents: 'fwjeofiwhjiovwhewhioe',
+            id: '57982783479'
         }
     ];
 
