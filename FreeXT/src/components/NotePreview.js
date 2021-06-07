@@ -2,12 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Spacer from './Spacer';
 
-const NotePreview = ({ title, onClick }) => {
+const NotePreview = ({ title, contents, onClick }) => {
     return (
         <TouchableOpacity onPress={onClick}>
             <Spacer>
                 <View style={styles.container}>
-                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.title} numberOfLines={1}>{title}</Text>
+                    <Text style={styles.subtitle} numberOfLines={1}>{contents}</Text>
                 </View>
             </Spacer>
         </TouchableOpacity>
@@ -22,6 +23,10 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 26
+    },
+    subtitle: {
+        fontSize: 16,
+        color: 'grey'
     }
 });
 
