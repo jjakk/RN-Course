@@ -8,9 +8,7 @@ import SignupScreen from './src/screens/SignupScreen';
 
 const navigator = createStackNavigator({
   Home: HomeScreen,
-  Note: NoteScreen,
-  Signin: SigninScreen,
-  signup: SignupScreen
+  Note: NoteScreen
 });
 
 const App = createAppContainer(navigator);
