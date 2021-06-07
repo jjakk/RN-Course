@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import Spacer from '../components/Spacer';
 import NotePreview from '../components/NotePreview';
+import { NavigationEvents } from 'react-navigation';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
     let notes = [
         {
             title: 'Physics Notes',
@@ -38,7 +39,9 @@ const HomeScreen = () => {
                 renderItem={({ item }) => (
                         <NotePreview
                             title={item.title}
-                            onClick={() => {}}
+                            onClick={() => {
+                                navigation.navigate('Note');
+                            }}
                         />
                     )
                 }

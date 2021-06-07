@@ -7,12 +7,14 @@ import Map from '../components/Map';
 
 const TrackCreateScreen = () => {
     const [err, setErr] = useState(null);
-
+    
     const startWatching = async () => {
-        try{
-            await requestForegroundPermissionsAsync();
-        }
-        catch(e){
+        try {
+            const { granted } = await requestPermissionsAsync();
+            if (!granted) {
+                throw new Error('Location permission not granted');
+            }
+        } catch (e) {
             setErr(e);
         }
     };
