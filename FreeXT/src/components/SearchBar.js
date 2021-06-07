@@ -1,13 +1,11 @@
 import React from 'react';
 import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 const SearchBar = () => {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => console.log('navigate to sign in')}>
-                <FontAwesome name="user-o" style={styles.icon} />
-            </TouchableOpacity>
+            <AntDesign name="search1" style={styles.icon} />
             <TextInput
                 placeholder='Search'
                 style={styles.input}
