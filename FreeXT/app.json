@@ -27,7 +27,7 @@
       "package": "com.protosapps.freext"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
     }
   }
 }

@@ -1,66 +1,73 @@
-import React from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
-import SearchBar from '../components/SearchBar';
-import Spacer from '../components/Spacer';
+import React, { useEffect, useContext } from 'react';
+import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Context } from '../context/NotesContext';
 import NotePreview from '../components/NotePreview';
-import { NavigationEvents } from 'react-navigation';
+import { Feather } from '@expo/vector-icons'; 
 
 const HomeScreen = ({ navigation }) => {
+    const { state, createNote } = useContext(Context);
+
     let notes = [
         {
             title: 'Physics Notes',
-            contents: 'The are my physics notes. f=ma. Thats all there really is to it.',
+            content: 'The are my physics notes. f=ma. Thats all there really is to it.',
             id: '34028490'
         },
         {
             title: 'Chem Notes',
-            contents: 'These are my chem notes. lithium is the 3rd element.',
+            content: 'These are my chem notes. lithium is the 3rd element.',
             id: '238490570'
         },
         {
             title: 'Groceries',
-            contents: '1.) Chicken nuggies 2.) salad 3.) french fries',
+            content: '1.) Chicken nuggies 2.) salad 3.) french fries',
             id: '754387592'
         },
         {
             title: 'Things to Remember',
-            contents: 'These are some other things to remember. Take out the trash',
+            content: 'These are some other things to remember. Take out the trash',
             id: '57982783479'
         }
     ];
 
+    useEffect(() => {
+        //createNote('the way', 'This is the way');
+    }, []);
+
     return (
-        <View style={styles.container}>
-            <Spacer>
-                <SearchBar />
-            </Spacer>
+        <>
             <FlatList
                 data={notes}
                 renderItem={({ item }) => (
                         <NotePreview
                             title={item.title}
-                            contents={item.contents}
+                            content={item.content}
                             onClick={() => {
-                                navigation.navigate('Note');
+                                navigation.navigate('Note', { title: item.title, content: item.content });
                             }}
                         />
                     )
                 }
                 keyExtractor={(item) => item.id}
             />
-        </View>
+        </>
     );
 };
 
-HomeScreen.navigationOptions = () => {
+
+HomeScreen.navigationOptions = ({ navigation }) => {
     return {
-        headerShown: false,
+        headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('Note')}>
+                <Feather name="plus" size={30} style={{marginRight: 15}} />
+            </TouchableOpacity>
+        ),
     };
 };
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 75
+        marginTop: 10
     }
 });
 
