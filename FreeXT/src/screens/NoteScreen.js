@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Spacer from '../components/Spacer';
 import { Ionicons } from '@expo/vector-icons';
@@ -10,9 +9,7 @@ const NoteScreen = ({ navigation }) => {
     const [content, setContent] = useState(navigation.getParam('content'));
 
     return (
-        <KeyboardAwareScrollView
-            style={styles.container}
-        >
+        <View style={styles.container}>
             <TextInput
                 style={styles.title}
                 value={title}
@@ -26,13 +23,12 @@ const NoteScreen = ({ navigation }) => {
                 placeholder='Content'
                 onChangeText={setContent}
             />
-        </KeyboardAwareScrollView>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'column',
         flex: 1
     },
     title: {
@@ -41,7 +37,8 @@ const styles = StyleSheet.create({
     },
     content: {
         fontSize: 18,
-        padding: 15,
+        margin: 15,
+        textAlignVertical: 'top',
         flex: 1
     }
 });
