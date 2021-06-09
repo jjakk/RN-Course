@@ -7,34 +7,47 @@ const notesReducer = (state, action) => {
     switch(action.type){
         case 'create_note':
             return state;
+        case 'get_note':
+            return state;
+        case 'get_notes':
+            return action.payload;
+        case 'add_error':
+            return { ...state, errorMessage: action.payload.errorMessage };
         default:
             return state;
     }
 };
 
-const getNote = (dispatch) => () => {
-    dispatch();
+const getNote = (dispatch) => async ({ id }) => {
+    const note = await AsyncStorage.getItem(id);
+    dispatch({ type: 'get_note', payload: note });
 };
 
-const getNotes = (dispatch) => () => {
-    dispatch();
+const getNotes = (dispatch) => async () => {
+    const keys = await AsyncStorage.getAllKeys();
+    let notes = [];
+    keys.forEach(async (key) => {
+        let note = await AsyncStorage.getItem(key);
+        note = JSON.parse(note);
+        notes.push(note);
+    });
+    console.log(notes);
+    dispatch({ type: 'get_notes', payload: null });
 };
 
-const createNote = (dispatch) => async ({title, content}) => {
+const createNote = (dispatch) => async ({ title, content }) => {
     try{
         let id = uuid.v4();
-        console.log(JSON.stringify({title, content}));
         await AsyncStorage.setItem(id, JSON.stringify({title, content}));
-        let result = await AsyncStorage.getItem(id);
-        console.log(JSON.parse(result));
         dispatch({ type: 'create_note', payload: id });
     }
     catch(err){
-
+        dispatch({ type: 'add_error', payload: { errorMessage: `Error: ${err}` } });
     }
 };
 
-const updateNote = (dispatch) => () => {
+const updateNote = (dispatch) => async ({ id }) => {
+
     dispatch();
 };
 

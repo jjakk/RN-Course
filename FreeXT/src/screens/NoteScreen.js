@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Spacer from '../components/Spacer';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState, useEffect } from 'react';
+import { View, TextInput, StyleSheet } from 'react-native';
 
 const NoteScreen = ({ navigation }) => {
     const [title, setTitle] = useState(navigation.getParam('title'));
     const [content, setContent] = useState(navigation.getParam('content'));
+
+    useEffect(() => {
+        const newNote = navigation.getParam('id') === undefined;
+    }, []);
 
     return (
         <View style={styles.container}>

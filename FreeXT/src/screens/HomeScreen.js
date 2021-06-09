@@ -1,11 +1,12 @@
 import React, { useEffect, useContext } from 'react';
-import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Context } from '../context/NotesContext';
 import NotePreview from '../components/NotePreview';
-import { Feather } from '@expo/vector-icons'; 
+import ErrorMessage from '../components/ErrorMessage';
+import { Feather } from '@expo/vector-icons';
 
 const HomeScreen = ({ navigation }) => {
-    const { state, createNote } = useContext(Context);
+    const { state, createNote, getNote, getNotes } = useContext(Context);
 
     let notes = [
         {
@@ -31,7 +32,7 @@ const HomeScreen = ({ navigation }) => {
     ];
 
     useEffect(() => {
-        //createNote('the way', 'This is the way');
+        getNotes();
     }, []);
 
     return (
@@ -43,7 +44,7 @@ const HomeScreen = ({ navigation }) => {
                             title={item.title}
                             content={item.content}
                             onClick={() => {
-                                navigation.navigate('Note', { title: item.title, content: item.content });
+                                navigation.navigate('Note', { title: item.title, content: item.content, id: 5 });
                             }}
                         />
                     )
