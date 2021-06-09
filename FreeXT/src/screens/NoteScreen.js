@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         margin: 15,
         textAlignVertical: 'top',
+        lineHeight: 25,
         flex: 1
     }
 });
