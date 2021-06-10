@@ -38,9 +38,7 @@ const createNote = (dispatch) => async ({ title, content }, callback) => {
 
 const updateNote = (dispatch) => async ({ id, title, content }) => {
     try{
-        console.log(await AsyncStorage.getItem(id));
         await AsyncStorage.setItem(id, JSON.stringify({ title, content, id }));
-        console.log(await AsyncStorage.getItem(id));
         dispatch({ type: 'update_note', payload: id });
     }
     catch(err){
@@ -48,10 +46,10 @@ const updateNote = (dispatch) => async ({ id, title, content }) => {
     }
 };
 
-const deleteNote = (dispatch) => async ({ id }) => {
+const deleteNote = (dispatch) => async ({ id }, callback) => {
     try{
         await AsyncStorage.removeItem(id);
-        dispatch({ type: 'delete_note', payload: id });
+        navigate('Home');
     }
     catch(err){
         console.log(`Error: ${err}`);

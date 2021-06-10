@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { Context } from '../context/NotesContext';
+import { MaterialIcons } from '@expo/vector-icons';
+import { navigate } from '../navigationRef';
 
 const NoteScreen = ({ navigation }) => {
-    const { state, createNote, updateNote } = useContext(Context);
+    const { state, createNote, deleteNote, updateNote } = useContext(Context);
     const [title, setTitle] = useState(navigation.getParam('title'));
     const [content, setContent] = useState(navigation.getParam('content'));
     const [noteId, setNoteId] = useState(navigation.getParam('id'));
@@ -13,6 +15,9 @@ const NoteScreen = ({ navigation }) => {
             setNoteId(id);
         });
     }
+    else{
+        updateNote({id: noteId, title, content});
+    }
 
     return (
         <View style={styles.container}>
@@ -20,27 +25,31 @@ const NoteScreen = ({ navigation }) => {
                 style={styles.title}
                 value={title}
                 placeholder='Title'
-                onChangeText={(newTitle) => {
-                    setTitle(newTitle);
-                    if(noteId){
-                        updateNote({id: noteId, title, content});
-                    }
-                }}
+                onChangeText={setTitle}
             />
             <TextInput
                 multiline
                 style={styles.content}
                 value={content}
                 placeholder='Content'
-                onChangeText={(newContent) => {
-                    setContent(newContent);
-                    if(noteId){
-                        updateNote({id: noteId, title, content});
-                    }
-                }}
+                onChangeText={setContent}
             />
         </View>
     );
+};
+
+NoteScreen.navigationOptions = ({ navigation }) => {
+    return {
+        headerRight: () => (
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate('Home')
+                }}
+            >
+                <MaterialIcons name="delete-outline" size={30} style={{marginRight: 15}} />
+            </TouchableOpacity>
+        ),
+    };
 };
 
 const styles = StyleSheet.create({
