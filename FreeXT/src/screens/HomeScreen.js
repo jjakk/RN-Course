@@ -6,45 +6,31 @@ import ErrorMessage from '../components/ErrorMessage';
 import { Feather } from '@expo/vector-icons';
 
 const HomeScreen = ({ navigation }) => {
-    const { state, createNote, getNote, getNotes } = useContext(Context);
-
-    let notes = [
-        {
-            title: 'Physics Notes',
-            content: 'The are my physics notes. f=ma. Thats all there really is to it.',
-            id: '34028490'
-        },
-        {
-            title: 'Chem Notes',
-            content: 'These are my chem notes. lithium is the 3rd element.',
-            id: '238490570'
-        },
-        {
-            title: 'Groceries',
-            content: '1.) Chicken nuggies 2.) salad 3.) french fries',
-            id: '754387592'
-        },
-        {
-            title: 'Things to Remember',
-            content: 'These are some other things to remember. Take out the trash',
-            id: '57982783479'
-        }
-    ];
+    const { state, createNote, getNotes } = useContext(Context);
 
     useEffect(() => {
         getNotes();
+
+        const listener = navigation.addListener('didFocus', () => {
+            getNotes();
+        });
+
+        return () => {
+            listener.remove();
+        };
     }, []);
 
     return (
         <>
             <FlatList
-                data={notes}
+                data={state}
                 renderItem={({ item }) => (
                         <NotePreview
                             title={item.title}
                             content={item.content}
+                            id={item.id}
                             onClick={() => {
-                                navigation.navigate('Note', { title: item.title, content: item.content, id: 5 });
+                                navigation.navigate('Note', { title: item.title, content: item.content, id: item.id });
                             }}
                         />
                     )
@@ -59,7 +45,11 @@ const HomeScreen = ({ navigation }) => {
 HomeScreen.navigationOptions = ({ navigation }) => {
     return {
         headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('Note')}>
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate('Note')
+                }}
+            >
                 <Feather name="plus" size={30} style={{marginRight: 15}} />
             </TouchableOpacity>
         ),

@@ -5,59 +5,62 @@ import { navigate } from '../navigationRef';
 
 const notesReducer = (state, action) => {
     switch(action.type){
-        case 'create_note':
-            return state;
-        case 'get_note':
-            return state;
         case 'get_notes':
             return action.payload;
-        case 'add_error':
-            return { ...state, errorMessage: action.payload.errorMessage };
+        case 'update_note':
+            return state;
         default:
             return state;
     }
 };
 
-const getNote = (dispatch) => async ({ id }) => {
-    const note = await AsyncStorage.getItem(id);
-    dispatch({ type: 'get_note', payload: note });
-};
-
 const getNotes = (dispatch) => async () => {
     const keys = await AsyncStorage.getAllKeys();
     let notes = [];
-    keys.forEach(async (key) => {
+    for(const key of keys){
         let note = await AsyncStorage.getItem(key);
         note = JSON.parse(note);
         notes.push(note);
-    });
-    console.log(notes);
-    dispatch({ type: 'get_notes', payload: null });
+    }
+    dispatch({ type: 'get_notes', payload: notes });
 };
 
-const createNote = (dispatch) => async ({ title, content }) => {
+const createNote = (dispatch) => async ({ title, content }, callback) => {
     try{
         let id = uuid.v4();
-        await AsyncStorage.setItem(id, JSON.stringify({title, content}));
-        dispatch({ type: 'create_note', payload: id });
+        await AsyncStorage.setItem(id, JSON.stringify({title, content, id}));
+        callback(id);
     }
     catch(err){
-        dispatch({ type: 'add_error', payload: { errorMessage: `Error: ${err}` } });
+        console.log(`Error: ${err}`);
     }
 };
 
-const updateNote = (dispatch) => async ({ id }) => {
-
-    dispatch();
+const updateNote = (dispatch) => async ({ id, title, content }) => {
+    try{
+        console.log(await AsyncStorage.getItem(id));
+        await AsyncStorage.setItem(id, JSON.stringify({ title, content, id }));
+        console.log(await AsyncStorage.getItem(id));
+        dispatch({ type: 'update_note', payload: id });
+    }
+    catch(err){
+        console.log(`Error: ${err}`);
+    }
 };
 
-const deleteNote = (dispatch) => () => {
-    dispatch();
+const deleteNote = (dispatch) => async ({ id }) => {
+    try{
+        await AsyncStorage.removeItem(id);
+        dispatch({ type: 'delete_note', payload: id });
+    }
+    catch(err){
+        console.log(`Error: ${err}`);
+    }
 };
 
 export const { Provider, Context } = createDataContext(
     notesReducer,
-    { getNote, getNotes, createNote, updateNote, deleteNote },
+    { getNotes, createNote, updateNote, deleteNote },
     { errorMessage: '' }
 );
 

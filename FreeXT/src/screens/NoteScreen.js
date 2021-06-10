@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
+import { Context } from '../context/NotesContext';
 
 const NoteScreen = ({ navigation }) => {
+    const { state, createNote, updateNote } = useContext(Context);
     const [title, setTitle] = useState(navigation.getParam('title'));
     const [content, setContent] = useState(navigation.getParam('content'));
+    const [noteId, setNoteId] = useState(navigation.getParam('id'));
 
-    useEffect(() => {
-        const newNote = navigation.getParam('id') === undefined;
-    }, []);
+    if(!noteId){
+        createNote({ title, content }, (id) => {
+            setNoteId(id);
+        });
+    }
 
     return (
         <View style={styles.container}>
@@ -15,14 +20,24 @@ const NoteScreen = ({ navigation }) => {
                 style={styles.title}
                 value={title}
                 placeholder='Title'
-                onChangeText={setTitle}
+                onChangeText={(newTitle) => {
+                    setTitle(newTitle);
+                    if(noteId){
+                        updateNote({id: noteId, title, content});
+                    }
+                }}
             />
             <TextInput
                 multiline
                 style={styles.content}
                 value={content}
                 placeholder='Content'
-                onChangeText={setContent}
+                onChangeText={(newContent) => {
+                    setContent(newContent);
+                    if(noteId){
+                        updateNote({id: noteId, title, content});
+                    }
+                }}
             />
         </View>
     );

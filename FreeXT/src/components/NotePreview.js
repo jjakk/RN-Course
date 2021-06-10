@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Spacer from './Spacer';
 
-const NotePreview = ({ title, content, onClick }) => {
+const NotePreview = ({ title, content, onClick, id }) => {
     return (
         <TouchableOpacity onPress={onClick}>
             <Spacer>
