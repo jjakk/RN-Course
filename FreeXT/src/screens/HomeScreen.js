@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Context } from '../context/NotesContext';
 import NotePreview from '../components/NotePreview';
 import ErrorMessage from '../components/ErrorMessage';
@@ -21,7 +21,7 @@ const HomeScreen = ({ navigation }) => {
     }, []);
 
     return (
-        <>
+        <View style={styles.container}>
             <FlatList
                 data={state}
                 renderItem={({ item }) => (
@@ -37,7 +37,19 @@ const HomeScreen = ({ navigation }) => {
                 }
                 keyExtractor={(item) => item.id}
             />
-        </>
+            {
+            state.length === 0
+                ? (
+                    <View style={styles.imageContainer}>
+                        <Image
+                            source={require('../../assets/adaptive-icon.png')}
+                            style={styles.empty}
+                        />
+                    </View>
+                )
+                : null
+            }
+        </View>
     );
 };
 
@@ -58,7 +70,20 @@ HomeScreen.navigationOptions = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 10
+        marginTop: 10,
+        flex: 1
+    },
+    imageContainer: {
+        flex: 2
+    },
+    empty: {
+        height: 150,
+        width: 150,
+        opacity: 0.5,
+        alignSelf: 'center',
+        borderWidth: 3,
+        borderColor: '#cccccc',
+        borderRadius: 999999
     }
 });
 

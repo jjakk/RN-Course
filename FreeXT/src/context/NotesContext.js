@@ -15,6 +15,7 @@ const notesReducer = (state, action) => {
 };
 
 const getNotes = (dispatch) => async () => {
+    // Get all notes
     const keys = await AsyncStorage.getAllKeys();
     let notes = [];
     for(const key of keys){
@@ -49,7 +50,7 @@ const updateNote = (dispatch) => async ({ id, title, content }) => {
 const deleteNote = (dispatch) => async ({ id }, callback) => {
     try{
         await AsyncStorage.removeItem(id);
-        navigate('Home');
+        callback();
     }
     catch(err){
         console.log(`Error: ${err}`);
