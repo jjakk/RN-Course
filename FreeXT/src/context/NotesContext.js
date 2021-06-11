@@ -15,9 +15,18 @@ const notesReducer = (state, action) => {
 };
 
 const getNotes = (dispatch) => async () => {
-    // Get all notes
-    const keys = await AsyncStorage.getAllKeys();
-    let notes = [];
+    // Filter out empty notes
+    let keys = await AsyncStorage.getAllKeys();
+    for(const key of keys){
+        let note = await AsyncStorage.getItem(key);
+        note = JSON.parse(note);
+        if(!note.title && !note.content){
+            await AsyncStorage.removeItem(note.id);
+        }
+    }
+    // Get all remaining notes
+    keys = await AsyncStorage.getAllKeys();
+    notes = [];
     for(const key of keys){
         let note = await AsyncStorage.getItem(key);
         note = JSON.parse(note);

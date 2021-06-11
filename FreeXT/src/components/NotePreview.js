@@ -7,7 +7,7 @@ const NotePreview = ({ title, content, onClick, id }) => {
         <TouchableOpacity onPress={onClick}>
             <Spacer>
                 <View style={styles.container}>
-                    <Text style={styles.title} numberOfLines={1}>{title}</Text>
+                    <Text style={styles.title} numberOfLines={1}>{title || content}</Text>
                     <Text style={styles.subtitle} numberOfLines={1}>{content}</Text>
                 </View>
             </Spacer>
