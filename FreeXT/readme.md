@@ -1,2 +1,2 @@
 # FreeXT
-A minimal notes app
+A minimal notetaking app
