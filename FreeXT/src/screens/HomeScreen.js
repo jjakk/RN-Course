@@ -2,8 +2,9 @@ import React, { useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Context } from '../context/NotesContext';
 import NotePreview from '../components/NotePreview';
-import ErrorMessage from '../components/ErrorMessage';
 import { Feather } from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Spacer from '../components/Spacer';
 
 const HomeScreen = ({ navigation }) => {
     const { state, createNote, getNotes } = useContext(Context);
@@ -21,7 +22,20 @@ const HomeScreen = ({ navigation }) => {
     }, []);
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
+            <Spacer>
+                <View style={styles.header}>
+                    <Text style={styles.headerText}>FreeXT</Text>
+                    <TouchableOpacity
+                        style={styles.add}
+                        onPress={() => {
+                            navigation.navigate('Note')
+                        }}
+                    >
+                        <Feather name="plus" size={42} />
+                    </TouchableOpacity>
+                </View>
+            </Spacer>
             <FlatList
                 data={state}
                 renderItem={({ item }) => (
@@ -40,7 +54,7 @@ const HomeScreen = ({ navigation }) => {
             {
             state.length === 0
                 ? (
-                    <View style={styles.imageContainer}>
+                    <View style={styles.emptyContainer}>
                         <Image
                             source={require('../../assets/adaptive-icon.png')}
                             style={styles.empty}
@@ -49,31 +63,31 @@ const HomeScreen = ({ navigation }) => {
                 )
                 : null
             }
-        </View>
+        </SafeAreaView>
     );
 };
 
 
 HomeScreen.navigationOptions = ({ navigation }) => {
     return {
-        headerRight: () => (
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate('Note')
-                }}
-            >
-                <Feather name="plus" size={30} style={{marginRight: 15}} />
-            </TouchableOpacity>
-        ),
+        headerShown: false
+        // headerRight: () => (
+        //     <TouchableOpacity
+        //         onPress={() => {
+        //             navigation.navigate('Note')
+        //         }}
+        //     >
+        //         <Feather name="plus" size={30} style={{marginRight: 15}} />
+        //     </TouchableOpacity>
+        // ),
     };
 };
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 10,
         flex: 1
     },
-    imageContainer: {
+    emptyContainer: {
         flex: 2
     },
     empty: {
@@ -84,6 +98,19 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderColor: '#cccccc',
         borderRadius: 999999
+    },
+    header: {
+        paddingBottom: 10,
+        borderBottomWidth: 2,
+        borderColor: '#D7D7D7'
+    },
+    headerText: {
+        fontSize: 42,
+        position: 'absolute'
+    },
+    add: {
+        alignSelf: 'flex-end',
+        margin: 10
     }
 });
 
