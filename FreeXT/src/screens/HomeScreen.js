@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderWidth: 3,
         borderColor: '#cccccc',
-        borderRadius: 999999
+        borderRadius: 9999
     },
     header: {
         paddingBottom: 10,
