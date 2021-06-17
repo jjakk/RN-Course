@@ -78,8 +78,9 @@ const styles = StyleSheet.create({
         padding: 15,
         fontSize: 26,
         flex: 1,
-        borderWidth: 2,
-        borderColor: '#D7D7D7',
+        borderWidth: 1,
+        backgroundColor: 'white',
+        borderColor: '#e8e8e8',
         borderRadius: 10
     },
     back: {
@@ -97,8 +98,9 @@ const styles = StyleSheet.create({
         lineHeight: 25,
         flex: 1,
         padding: 15,
-        borderWidth: 2,
-        borderColor: '#D7D7D7',
+        borderWidth: 1,
+        backgroundColor: 'white',
+        borderColor: '#e8e8e8',
         borderRadius: 10
     }
 });
