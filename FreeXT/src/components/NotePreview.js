@@ -17,7 +17,7 @@ const NotePreview = ({ title, content, onClick, id }) => {
 
 const styles = StyleSheet.create({
     container: {
-        borderBottomWidth: 1,
+        borderBottomWidth: 2,
         borderColor: '#D7D7D7',
         paddingBottom: 10
     },
