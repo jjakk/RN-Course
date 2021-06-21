@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         padding: 15,
         fontSize: 26,
         flex: 1,
-        borderWidth: 1,
+        borderWidth: 2,
         backgroundColor: 'white',
         borderColor: '#e8e8e8',
         borderRadius: 10
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         lineHeight: 25,
         flex: 1,
         padding: 15,
-        borderWidth: 1,
+        borderWidth: 2,
         backgroundColor: 'white',
         borderColor: '#e8e8e8',
         borderRadius: 10
